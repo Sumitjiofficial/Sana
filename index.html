@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Birthday Surprise ✨</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="player" loop></audio>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div id="screen-0" class="screen active">
+        <h2>Vibe Check 🎵</h2>
+        <div class="glass-card" style="padding: 25px;">
+            <p style="margin-top: 0; color: #555; font-weight: 600;">Pick a track to set the mood!</p>
+            <div class="song-grid">
+                <button onclick="playSong('1.mp3', this)">Song 1</button>
+                <button onclick="playSong('2.mp3', this)">Song 2</button>
+                <button onclick="playSong('3.mp3', this)">Song 3</button>
+                <button onclick="playSong('4.mp3', this)">Song 4</button>
+            </div>
+            <button id="surprise-btn" class="outline" onclick="randomSong()" style="width: 100%; margin: 0 0 15px 0;">Surprise Me 🎲</button>
+            <button onclick="transitionScreen('screen-0', 'screen-1'); startCountdown();" style="width: 100%; margin: 0; font-size: 18px; padding: 18px;">
+                Let's Go ✨
+            </button>
+        </div>
+    </div>
+
+    <div id="screen-1" class="screen">
+        <div id="countdown">3</div>
+        <div class="message">Brace yourself...</div>
+    </div>
+
+    <div id="screen-2" class="screen">
+        <div class="glass-card" style="display: flex; flex-direction: column; align-items: center; border:none; background: transparent; box-shadow: none;">
+            <img src="loading-cat.png" class="cat-gif" alt="Loading GIF">
+            <h2 style="font-family: 'Pacifico', cursive; color: #fff; margin-top: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">Loading your Birthday Surprise...</h2>
+            <div class="progress-container">
+                <div id="bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen-3" class="screen">
+        <div class="glass-card">
+            <div class="top-badge">A SURPRISE JUST FOR YOU</div>
+            <div class="gif-circle">
+                <img src="bubu-dudu-sseeyall.gif" alt="Bubu Dudu">
+            </div>
+            <h1 class="title">For My <span>Favorite</span> Person</h1>
+            <p class="msg">I made something from the heart, filled with all my love and a bit of coding magic.<br><br>Ready?</p>
+            <button onclick="transitionScreen('screen-3', 'screen-4')" style="width: 100%; margin:0;">
+                OPEN IT 💌
+            </button>
+        </div>
+    </div>
+
+    <div id="screen-4" class="screen">
+        <div class="glass-card">
+            <h1 class="title" style="font-size: 36px;">Happy <span>Birthday</span></h1>
+            <div style="font-size: 24px; color: #ff6b81; font-weight: bold; margin-bottom: 15px;">Sneha (Sana)🎂</div>
+            <img src="birthday-happy.gif" class="birthday-happy-gif" alt="Happy Birthday">
+            <button onclick="transitionScreen('screen-4', 'screen-5')" style="width: 100%; margin:0;">
+                TIME FOR CAKE 🍰
+            </button>
+        </div>
+    </div>
+
+    <div id="screen-5" class="screen">
+        <div class="glass-card">
+            <div class="special-text">Make a Wish!</div>
+            <img id="interactive-cake" src="birthday-bday.gif" class="birthday-gif" style="width: 150px; border-radius: 50%; box-shadow: 0 0 20px rgba(255, 107, 129, 0.4);" alt="Cake">
+            <p id="pressText">Tap the button 5 times to cut it!</p>
+            <div class="progress-container" style="margin: 0 auto 20px auto; height: 10px;">
+                <div id="cake-bar" style="height: 100%; width: 0%; background: #ff4fa1; transition: width 0.3s;"></div>
+            </div>
+            <button class="outline" onclick="blowCandles()" style="width: 100%; margin:0; font-size: 18px; border-width: 3px;">
+                🔪 Cut Cake
+            </button>
+        </div>
+    </div>
+
+    <div id="screen-6" class="screen">
+        <div class="glass-card">
+            <h1>Yayyy! 🎉</h1>
+            <p style="color: #444; font-size: 18px; font-weight: 600;">Hope all your wishes come true! 💫</p>
+            <div style="font-size: 100px; animation: bounce 2s infinite;">🍰</div>
+            <p style="color: #888; font-size: 14px; margin-top: 20px;">Enjoy your day!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
