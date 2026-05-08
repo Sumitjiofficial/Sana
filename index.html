@@ -665,8 +665,57 @@
                 playerVars: { 'autoplay': 0, 'controls': 0, 'showinfo': 0, 'rel': 0, 'loop': 1, 'playlist': 'vhVBWw6rId0' }
             });
         }
-
+let sideConfettiInterval = null;
         function goToScreen8() {
+
+    if (ytMusicPlayer && ytMusicPlayer.playVideo) {
+        let oldPlayer = document.getElementById("player");
+
+        if (oldPlayer && !oldPlayer.paused) {
+            oldPlayer.pause();
+        }
+
+        ytMusicPlayer.playVideo();
+    }
+
+    transitionScreen('screen-7', 'screen-8');
+
+    setTimeout(() => {
+
+        confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#ff9a9e', '#fecfef', '#ffffff', '#ff3385']
+        });
+
+        // Purana interval band karo agar already chal raha ho
+        if (sideConfettiInterval) {
+            clearInterval(sideConfettiInterval);
+        }
+
+        sideConfettiInterval = setInterval(() => {
+
+            confetti({
+                particleCount: 5,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#ff9a9e', '#ff3385']
+            });
+
+            confetti({
+                particleCount: 5,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#ff9a9e', '#ff3385']
+            });
+
+        }, 1500);
+
+    }, 500);
+} {
             if (ytMusicPlayer && ytMusicPlayer.playVideo) {
                 let oldPlayer = document.getElementById("player");
                 if(oldPlayer && !oldPlayer.paused) oldPlayer.pause();
