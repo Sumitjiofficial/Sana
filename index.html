@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>  
 <html lang="en">  
 <head>  
@@ -6,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
     <title>Birthday Surprise ✨</title>  
     
-    <!-- Fonts for both files -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Pacifico&family=Quicksand:wght@500;700&family=Varela+Round&display=swap" rel="stylesheet">  
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Chewy&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Paprika&display=swap" rel="stylesheet">  
 
     <style>  
         /* =========================================
-           GLOBAL STYLES & ANIMATED BACKGROUND (FINAL.HTML)
+           GLOBAL STYLES & ANIMATED BACKGROUND
         ========================================= */
         *, *::before, *::after {
             box-sizing: border-box;
@@ -23,7 +20,7 @@
             padding: 0;
             height: 100vh;  
             color: #333;  
-            font-family: 'Fredoka', sans-serif;  
+            font-family: 'Paprika', cursive;  
             text-align: center;  
             overflow: hidden;  
             background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);  
@@ -70,7 +67,7 @@
             background: linear-gradient(135deg, #ff6b81, #ff4fa1);  
             color: white;  
             font-size: 16px;  
-            font-family: 'Fredoka', sans-serif;  
+            font-family: 'Paprika', cursive;  
             font-weight: 600;  
             cursor: pointer;  
             box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);  
@@ -102,10 +99,10 @@
         }  
 
         /* SCREEN 0-6 STYLES */  
-        #screen-0 h2 { font-family: 'Pacifico', cursive; color: #fff; font-size: 32px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }  
+        #screen-0 h2 { color: #fff; font-size: 32px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }  
         .song-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }  
         #countdown { font-size: 35vw; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.8); animation: pop 1s infinite; margin: 0; line-height: 1; }  
-        #screen-1 .message { font-family: 'Pacifico', cursive; font-size: 8vw; color: #fff; }  
+        #screen-1 .message { font-size: 8vw; color: #fff; }  
         @keyframes pop { 0% { transform: scale(0.8); opacity: 0; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }  
         .cat-gif { width: 250px; animation: bounce 2s infinite; border-radius: 20px; }  
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }  
@@ -115,13 +112,13 @@
         .gif-circle { width: 140px; height: 140px; margin: 0 auto 15px auto; border-radius: 50%; border: 6px solid white; overflow: hidden; box-shadow: 0 10px 20px rgba(255,105,180,0.3); background: white; }  
         .gif-circle img { width: 100%; height: 100%; object-fit: cover; }  
         .title { font-size: 28px; margin: 10px 0; color: #4b1c28; }  
-        .title span { color: #ff4fa1; font-family: 'Pacifico', cursive; font-weight: normal; }  
+        .title span { color: #ff4fa1; font-weight: normal; }  
         .msg { color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 20px; }  
         .birthday-happy-gif { width: 250px; animation: bounce 2s infinite; border-radius: 20px; }  
-        .special-text { font-family: 'Pacifico', cursive; font-size: 32px; color: #ff4fa1; text-shadow: 1px 1px 0 #fff; margin-bottom: 20px; }  
+        .special-text { font-size: 32px; color: #ff4fa1; text-shadow: 1px 1px 0 #fff; margin-bottom: 20px; }  
         #interactive-cake { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }  
         #pressText { font-weight: 600; font-size: 18px; color: #555; margin: 15px 0; background: rgba(255,255,255,0.8); padding: 10px; border-radius: 15px; }  
-        #screen-6 h1, .bday-header h1 { font-family: 'Pacifico', cursive; color: #ff4fa1; font-size: 40px; margin-bottom: 10px; text-shadow: 2px 2px 0px white; }  
+        #screen-6 h1, .bday-header h1 { color: #ff4fa1; font-size: 40px; margin-bottom: 10px; text-shadow: 2px 2px 0px white; }  
         #confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }  
 
         /* ================= SCREEN 7 & 8 STYLES ================= */
@@ -139,11 +136,11 @@
         #ready-content { display: none; flex-direction: column; align-items: center; gap: 15px; animation: fadeIn 1s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .card-box h2, .bday-header h2 { font-family: 'Varela Round', sans-serif; font-size: 22px; color: #ff3385; margin-bottom: 10px; }
-        .card-box p { font-family: 'Quicksand', sans-serif; font-size: 16px; color: #ff66a3; line-height: 1.5; margin:0;}
+        .card-box h2, .bday-header h2 { font-size: 22px; color: #ff3385; margin-bottom: 10px; }
+        .card-box p { font-size: 16px; color: #ff66a3; line-height: 1.5; margin:0;}
         .emojis { font-size: 24px; letter-spacing: 5px; }
         
-        .btn-special { background: linear-gradient(135deg, #ff66a3, #ff3385); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 51, 133, 0.3); margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.2s; z-index: 20;}
+        .btn-special { background: linear-gradient(135deg, #ff66a3, #ff3385); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-size: 18px; font-weight: bold; font-family: 'Paprika', cursive; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 51, 133, 0.3); margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.2s; z-index: 20;}
         .btn-special:hover, .btn-special:active { transform: translateY(-3px) scale(1.05); }
 
         /* Flip Card Scene */
@@ -152,19 +149,17 @@
         .scene.is-flipped .card-inner { transform: rotateY(180deg); }
         .card-face { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; box-sizing: border-box; box-shadow: 0 10px 25px rgba(255, 51, 133, 0.2); }
         .card-front { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); color: white; border: 2px solid #fff; }
-        .card-front h3 { font-size: 24px; font-family: 'Varela Round', sans-serif; margin-bottom: 15px; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.1); }
+        .card-front h3 { font-size: 24px; margin-bottom: 15px; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.1); }
         .card-front .icon { font-size: 50px; animation: cardbounce 2s infinite; }
         @keyframes cardbounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-15px);} 60% {transform: translateY(-7px);} }
         .card-back { background: white; transform: rotateY(180deg); border: 2px dashed #ff66a3; color: #ff3385; padding: 25px; }
-        .card-back p { font-family: 'Quicksand', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 10px; color: #d6336c; }
+        .card-back p { font-size: 15px; line-height: 1.6; margin-bottom: 10px; color: #d6336c; }
         
-        .bottom-text { font-family: 'Quicksand', sans-serif; text-align: center; font-size: 15px; color: #e64980; padding: 0 10px; line-height: 1.5; font-weight: 500; z-index: 10; max-width: 400px;}
+        .bottom-text { text-align: center; font-size: 15px; color: #e64980; padding: 0 10px; line-height: 1.5; font-weight: 500; z-index: 10; max-width: 400px;}
         .dots { font-size: 30px; color: #ff99c2; letter-spacing: 2px; animation: blink 1.5s infinite; }
         @keyframes blink { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
 
-</style>
 
-<script>
         /* =========================================
            SAM.HTML (SCREEN 9) MERGED LOGIC
         ========================================= */
@@ -181,7 +176,7 @@
             // Transition to the final dark screen
             transitionScreen('screen-8', 'screen-9');
 
-            // Initial dramatic delay for a completely dark screen before showing "TURN ON LIGHTS"
+            // Initial dramatic delay
             setTimeout(() => {
                 const btnLights = document.getElementById('btn-lights');
                 btnLights.style.display = 'block';
@@ -226,7 +221,6 @@
 
         btnLights.addEventListener('click', () => {
             document.getElementById('screen-9').classList.add('lights-on');
-            document.getElementById('sam-bg').classList.add('active');
             document.getElementById('stars-canvas').classList.add('active');
             document.getElementById('row1').classList.add('active');
             document.getElementById('row2').classList.add('active');
@@ -235,7 +229,7 @@
         });
 
         btnMusic.addEventListener('click', () => {
-            const audio = document.getElementById('bday-audio');
+            const audio = document.getElementById('bday-audio.mp3');
             audio.play().catch(e => console.log("Audio play prevented or no src provided."));
             switchBtn(btnMusic, btnDecorate);
         });
@@ -313,7 +307,7 @@
         animateStars();
         window.addEventListener('resize', resizeSam);
 
-// LIGHTS
+        // LIGHTS
         const lightColors = ['red', 'yellow', 'blue', 'green', 'pink', 'orange'];
         function createLights(id){
             const row = document.getElementById(id);
@@ -352,7 +346,7 @@
             samSparkles.appendChild(s);
         }
 
-        // SAM CONFETTI (Renamed to avoid collision with CDN confetti)
+        // SAM CONFETTI
         function samConfetti(){
             for(let i=0; i<140; i++){
                 const c = document.createElement('div');
