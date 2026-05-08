@@ -165,10 +165,7 @@
         ========================================= */
 
         function goToSamScreen() {
-            // Pause all previous audio
-            let oldPlayer = document.getElementById("player");
-            if(oldPlayer && !oldPlayer.paused) oldPlayer.pause();
-            if (ytMusicPlayer && ytMusicPlayer.pauseVideo) ytMusicPlayer.pauseVideo();
+            
             
             // Hide hearts background and other visual clutters
             document.getElementById('bg-hearts').style.display = 'none';
