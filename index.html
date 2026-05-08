@@ -5,11 +5,22 @@
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
     <title>Birthday Surprise ✨</title>  
+    
+    <!-- Fonts for both files -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Pacifico&family=Quicksand:wght@500;700&family=Varela+Round&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Chewy&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+
     <style>  
-        /* GLOBAL STYLES & ANIMATED BACKGROUND */  
+        /* =========================================
+           GLOBAL STYLES & ANIMATED BACKGROUND (FINAL.HTML)
+        ========================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {  
             margin: 0;  
+            padding: 0;
             height: 100vh;  
             color: #333;  
             font-family: 'Fredoka', sans-serif;  
@@ -21,6 +32,7 @@
             display: flex;  
             justify-content: center;  
             align-items: center;  
+            -webkit-tap-highlight-color: transparent;
         }  
         @keyframes gradientBG {  
             0% { background-position: 0% 50%; }  
@@ -50,7 +62,7 @@
         }  
 
         /* COMMON BUTTONS */  
-        button {  
+        .btn-common {  
             padding: 15px 25px;  
             margin: 10px;  
             border: none;  
@@ -64,11 +76,11 @@
             box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);  
             transition: transform 0.2s, box-shadow 0.2s;  
         }  
-        button:hover, button:active {  
+        .btn-common:hover, .btn-common:active {  
             transform: translateY(-3px) scale(1.05);  
             box-shadow: 0 8px 20px rgba(255, 107, 129, 0.6);  
         }  
-        button.outline {  
+        .btn-common.outline {  
             background: rgba(255, 255, 255, 0.8);  
             color: #ff4fa1;  
             border: 2px solid #ff4fa1;  
@@ -131,8 +143,9 @@
         .card-box p { font-family: 'Quicksand', sans-serif; font-size: 16px; color: #ff66a3; line-height: 1.5; margin:0;}
         .emojis { font-size: 24px; letter-spacing: 5px; }
         
-        .btn-special { background: linear-gradient(135deg, #ff66a3, #ff3385); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 51, 133, 0.3); margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        
+        .btn-special { background: linear-gradient(135deg, #ff66a3, #ff3385); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 51, 133, 0.3); margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.2s; z-index: 20;}
+        .btn-special:hover, .btn-special:active { transform: translateY(-3px) scale(1.05); }
+
         /* Flip Card Scene */
         .scene { width: 280px; height: 280px; perspective: 600px; margin-bottom: 30px; cursor: pointer; z-index: 10;}
         .card-inner { width: 100%; height: 100%; position: relative; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
@@ -148,31 +161,249 @@
         .bottom-text { font-family: 'Quicksand', sans-serif; text-align: center; font-size: 15px; color: #e64980; padding: 0 10px; line-height: 1.5; font-weight: 500; z-index: 10; max-width: 400px;}
         .dots { font-size: 30px; color: #ff99c2; letter-spacing: 2px; animation: blink 1.5s infinite; }
         @keyframes blink { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
+
+
+        /* =========================================
+           SAM.HTML (SCREEN 9) STYLES
+        ========================================= */
+        #screen-9 {
+            background-color: #000; 
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, background-color 2s ease-in-out;
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            border-radius: 0;
+        }
+        #screen-9.lights-on {
+            background-color: #fff8ef;
+        }
+
+        #sam-scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #sam-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at top, #fff8ef 0%, #fff0da 45%, #f8e1bc 100%);
+            z-index: 0;
+            opacity: 0; 
+            transition: opacity 2s ease-in-out;
+        }
+
+        #sam-bg.active { opacity: 1; }
+
+        #stars-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+        #stars-canvas.active { opacity: 1; }
+
+        /* UI BUTTONS & TEXT for Sam Screen */
+        #ui-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .action-btn {
+            pointer-events: auto;
+            padding: 15px 30px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            color: #fff;
+            background: #d44f87;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 79, 135, 0.4);
+            transition: transform 0.2s, opacity 0.5s;
+            opacity: 0;
+            display: none;
+        }
+
+        .action-btn.visible {
+            display: block;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .action-btn:active { transform: scale(0.95); }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        #message-container {
+            position: absolute;
+            inset: 0;
+            z-index: 150;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .story-text { 
+            top: 42%;
+            font-family: 'Caveat', cursive;
+            font-size: 46px;
+            color: #d44f87;
+            text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 0 4px 15px rgba(0,0,0,0.4);
+            opacity: 0;
+            position: absolute;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            transform: translateY(20px);
+            z-index: 300;
+        }
+
+        .story-text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media(max-width:480px) {
+            .story-text { font-size: 24px; }
+            .action-btn { font-size: 16px; padding: 12px 24px; }
+        }
+
+        /* LIGHTS */
+        .light-row { position: absolute; width: 100%; height: 40px; z-index: 12; opacity: 0; transition: opacity 2s ease-in-out; }
+        .light-row.active { opacity: 1; }
+        #row1 { top: 8px; }
+        #row2 { top: 58px; }
+
+        .wire { position: absolute; top: 5px; width: 100%; height: 3px; background: #55331d; }
+        .bulb-wrap { position: absolute; display: flex; flex-direction: column; align-items: center; }
+        .cap { width: 10px; height: 6px; background: #666; border-radius: 2px; }
+        .bulb { width: 17px; height: 24px; margin-top: -2px; border-radius: 50%; animation: glow 1.4s infinite alternate; }
+
+        @keyframes glow {
+            from { filter: brightness(.7); }
+            to { filter: brightness(1.5); }
+        }
+        .red { background: #ff5757; box-shadow: 0 0 18px #ff5757; }
+        .yellow { background: #ffd93d; box-shadow: 0 0 18px #ffd93d; }
+        .blue { background: #57a8ff; box-shadow: 0 0 18px #57a8ff; }
+        .green { background: #4de46b; box-shadow: 0 0 18px #4de46b; }
+        .pink { background: #ff78d2; box-shadow: 0 0 18px #ff78d2; }
+        .orange { background: #ffa43b; box-shadow: 0 0 18px #ffa43b; }
+
+        /* FLAGS */
+        #bunting-zone { position: absolute; inset: 0; z-index: 15; transform: translateY(-100%); transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        #bunting-zone.active { transform: translateY(0); }
+        .bunting-rope { position: absolute; top: 115px; width: 100%; height: 2px; background: #7a5835; }
+        .flag { position: absolute; top: 110px; width: 44px; height: 54px; clip-path: polygon(0 0, 100% 0, 50% 100%); display: flex; align-items: flex-start; justify-content: center; padding-top: 7px; font-family: 'Chewy', cursive; font-size: 22px; color: #fff; }
+        .f1 { left: 10%; background: #ff5a5a; }
+        .f2 { left: 26%; background: #ffd83c; }
+        .f3 { left: 42%; background: #47d86d; }
+        .f4 { left: 58%; background: #4a9cff; }
+        .f5 { left: 74%; background: #b86cff; }
+
+        /* BALLOONS */
+        #balloon-zone { position: absolute; inset: 0; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 1.5s ease-in-out; }
+        #balloon-zone.active { opacity: 1; }
+        .balloon { position: absolute; width: 82px; height: 106px; border-radius: 50%; animation: balloon-float 4s ease-in-out infinite; transform: translateY(100vh); transition: transform 2s cubic-bezier(0.25, 1, 0.5, 1); }
+        #balloon-zone.active .balloon { transform: translateY(0); }
+        .balloon::before { content: ''; position: absolute; top: 15%; left: 18%; width: 28%; height: 22%; border-radius: 50%; background: rgba(255,255,255,.42); }
+        .balloon::after { content: ''; position: absolute; top: 100%; left: 50%; width: 1px; height: 110px; background: rgba(0,0,0,.28); }
+        @keyframes balloon-float { 0% { transform: translateY(0px); } 50% { transform: translateY(-14px); } 100% { transform: translateY(0px); } }
+        .balloon-l1 { left: 3%; bottom: 145px; }
+        .balloon-l2 { left: 10%; bottom: 185px; }
+        .balloon-l3 { left: 17%; bottom: 145px; }
+        .balloon-r1 { right: 3%; bottom: 145px; }
+        .balloon-r2 { right: 10%; bottom: 185px; }
+        .balloon-r3 { right: 17%; bottom: 145px; }
+        .b1 { background: #ff9fcf; box-shadow: 0 0 28px #ff9fcf; }
+        .b2 { background: #ffd76a; box-shadow: 0 0 28px #ffd76a; }
+        .b3 { background: #b8ffd1; box-shadow: 0 0 28px #b8ffd1; }
+        .b4 { background: #9fc8ff; box-shadow: 0 0 28px #9fc8ff; }
+        .b5 { background: #e2b3ff; box-shadow: 0 0 28px #e2b3ff; }
+        .b6 { background: #ffb8b8; box-shadow: 0 0 28px #ffb8b8; }
+
+        /* CAKE */
+        #cake-wrap { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%) translateY(150%); z-index: 30; transition: transform 2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s; }
+        #cake-wrap.active { transform: translateX(-50%) translateY(0); }
+        #cake { display: flex; flex-direction: column; align-items: center; position: relative; margin-bottom: 28px; }
+        .tier { position: relative; overflow: hidden; }
+        .top-tier { width: 120px; height: 70px; border-radius: 14px 14px 5px 5px; background: linear-gradient(180deg, #ffb8d4, #ff6ea3); box-shadow: inset 0 6px 12px rgba(255,255,255,.35), 0 8px 18px rgba(255,105,180,.18); z-index: 3; }
+        .mid-tier { width: 190px; height: 95px; border-radius: 14px 14px 5px 5px; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #fff8fb, #ffd8ea); border: 3px solid rgba(255,255,255,.7); box-shadow: inset 0 6px 12px rgba(255,255,255,.45), 0 0 18px rgba(255,105,180,.25), 0 8px 18px rgba(255,105,180,.12); z-index: 2; }
+        .base-tier { width: 260px; height: 110px; border-radius: 14px 14px 5px 5px; background: linear-gradient(180deg, #ffb8d4, #ff6ea3); box-shadow: inset 0 6px 12px rgba(255,255,255,.35), 0 8px 18px rgba(255,105,180,.18); z-index: 1; }
+        .top-tier::after, .mid-tier::after, .base-tier::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 14px; background: radial-gradient(circle at 10px -2px, #fff 12px, transparent 13px); background-size: 24px 20px; background-repeat: repeat-x; }
+        .top-tier::before, .base-tier::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent 0, transparent 12px, rgba(255,255,255,.12) 12px, rgba(255,255,255,.12) 24px); }
+        .mid-tier::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,105,180,.25) 2px, transparent 2px); background-size: 18px 18px; }
+        .frost { position: absolute; top: 0; width: 100%; height: 15px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+        .cake-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5; width: 100%; text-align: center; font-family: 'Caveat', cursive; color: #c2185b; font-size: 22px; font-weight: 700; line-height: 1.05; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(255,255,255,.9), 0 0 10px rgba(255,105,180,.4); }
+        .cake-dot { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #ff4f93; top: 50%; transform: translateY(-50%); box-shadow: 0 0 10px rgba(255,105,180,.6); z-index: 6; }
+        .left-dot { left: 18px; }
+        .right-dot { right: 18px; }
+        #plate { width: 320px; height: 28px; margin-top: -2px; border-radius: 50%; background: radial-gradient(circle at top, #ffffff 0%, #ece3d3 45%, #cfc5b5 100%); box-shadow: 0 8px 18px rgba(0,0,0,.18), inset 0 3px 8px rgba(255,255,255,.8); }
+
+        /* CANDLE */
+        #candle { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 40; opacity: 0; transition: opacity 1s; }
+        #candle.active { opacity: 1; }
+        #candle-body { width: 14px; height: 42px; border-radius: 4px; background: linear-gradient(180deg, #ffe96b, #ffbf00); }
+        #flame { position: absolute; top: -28px; left: 50%; transform: translateX(-50%); width: 18px; height: 28px; border-radius: 50%; background: linear-gradient(180deg, #fff36d, #ff7b00, #ff4500); animation: flicker .25s infinite alternate; opacity: 0; transition: opacity 0.5s; }
+        #candle.active #flame { opacity: 1; transition-delay: 0.5s; }
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(1) rotate(-2deg); } 100% { transform: translateX(-50%) scale(.9,1.08) rotate(2deg); } }
+
+        /* SPARKLES & CONFETTI (SAM) */
+        #sparkles { position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 0; transition: opacity 2s; }
+        #sparkles.active { opacity: 1; }
+        .spark { position: absolute; width: 14px; height: 14px; clip-path: polygon(50% 0%, 61% 35%, 100% 50%, 61% 65%, 50% 100%, 39% 65%, 0% 50%, 39% 35%); animation: sparkle 2.4s infinite ease-in-out; }
+        @keyframes sparkle { 0% { transform: scale(.2) rotate(0deg); opacity: .2; } 50% { transform: scale(1.4) rotate(180deg); opacity: 1; } 100% { transform: scale(.2) rotate(360deg); opacity: .2; } }
+        .sam-confetti { position: absolute; width: 10px; height: 16px; z-index: 100; }
+
+        @media(max-width:480px){
+            .flag { width: 38px; height: 48px; font-size: 16px; }
+            .balloon { width: 68px; height: 88px; }
+            .balloon::after { height: 92px; }
+            .balloon-l1 { left: 1%; bottom: 132px; }
+            .balloon-l2 { left: 8%; bottom: 168px; }
+            .balloon-l3 { left: 16%; bottom: 134px; }
+            .balloon-r1 { right: 1%; bottom: 132px; }
+            .balloon-r2 { right: 8%; bottom: 168px; }
+            .balloon-r3 { right: 16%; bottom: 134px; }
+            #cake-wrap { transform: translateX(-50%) translateY(150%) scale(0.7); transform-origin: bottom center; }
+            #cake-wrap.active { transform: translateX(-50%) translateY(0) scale(0.7); }
+        }
     </style>  
 </head>  
 <body>  
     <audio id="player" loop></audio>  
     <canvas id="confetti-canvas"></canvas>  
     
-    <!-- Fix: display: none se initialize mein problem hoti hai, use absolute off-screen instead -->
     <div style="position: absolute; width: 0; height: 0; overflow: hidden; z-index: -9999;">
         <div id="ytplayer"></div>
     </div>
     
     <div class="bg-hearts" id="bg-hearts"></div>
 
+    <!-- SCREENS 0-6 -->
     <div id="screen-0" class="screen active">  
         <h2>Vibe Check 🎵</h2>  
         <div class="glass-card" style="padding: 25px;">  
             <p style="margin-top: 0; color: #555; font-weight: 600;">Pick a track to set the mood!</p>  
             <div class="song-grid">  
-                <button onclick="playSong('1.mp3', this)">Song 1</button>  
-                <button onclick="playSong('2.mp3', this)">Song 2</button>  
-                <button onclick="playSong('3.mp3', this)">Song 3</button>  
-                <button onclick="playSong('4.mp3', this)">Song 4</button>  
+                <button class="btn-common" onclick="playSong('1.mp3', this)">Song 1</button>  
+                <button class="btn-common" onclick="playSong('2.mp3', this)">Song 2</button>  
+                <button class="btn-common" onclick="playSong('3.mp3', this)">Song 3</button>  
+                <button class="btn-common" onclick="playSong('4.mp3', this)">Song 4</button>  
             </div>  
-            <button id="surprise-btn" class="outline" onclick="randomSong()" style="width: 100%; margin: 0 0 15px 0;">Surprise Me 🎲</button>  
-            <button onclick="transitionScreen('screen-0', 'screen-1'); startCountdown();" style="width: 100%; margin: 0; font-size: 18px; padding: 18px;">  
+            <button id="surprise-btn" class="btn-common outline" onclick="randomSong()" style="width: 100%; margin: 0 0 15px 0;">Surprise Me 🎲</button>  
+            <button class="btn-common" onclick="transitionScreen('screen-0', 'screen-1'); startCountdown();" style="width: 100%; margin: 0; font-size: 18px; padding: 18px;">  
                 Let's Go ✨  
             </button>  
         </div>  
@@ -201,7 +432,7 @@
             </div>  
             <h1 class="title">For My <span>Favorite</span> Person</h1>  
             <p class="msg">I made something from the heart, filled with all my love and a bit of coding magic.<br><br>Ready?</p>  
-            <button onclick="transitionScreen('screen-3', 'screen-4')" style="width: 100%; margin:0;">  
+            <button class="btn-common" onclick="transitionScreen('screen-3', 'screen-4')" style="width: 100%; margin:0;">  
                 OPEN IT 💌  
             </button>  
         </div>  
@@ -212,7 +443,7 @@
             <h1 class="title" style="font-size: 36px;">Happy <span>Birthday</span></h1>  
             <div style="font-size: 24px; color: #ff6b81; font-weight: bold; margin-bottom: 15px;">Sneha (Sana)🎂</div>  
             <img src="birthday-happy.gif" class="birthday-happy-gif" alt="Happy Birthday" onerror="this.style.display='none'">  
-            <button onclick="transitionScreen('screen-4', 'screen-5')" style="width: 100%; margin:0;">  
+            <button class="btn-common" onclick="transitionScreen('screen-4', 'screen-5')" style="width: 100%; margin:0;">  
                 TIME FOR CAKE 🍰  
             </button>  
         </div>  
@@ -226,7 +457,7 @@
             <div class="progress-container" style="margin: 0 auto 20px auto; height: 10px;">  
                 <div id="cake-bar" style="height: 100%; width: 0%; background: #ff4fa1; transition: width 0.3s;"></div>  
             </div>  
-            <button class="outline" onclick="blowCandles()" style="width: 100%; margin:0; font-size: 18px; border-width: 3px;">  
+            <button class="btn-common outline" onclick="blowCandles()" style="width: 100%; margin:0; font-size: 18px; border-width: 3px;">  
                 🔪 Cut Cake  
             </button>  
         </div>  
@@ -238,10 +469,11 @@
             <p style="color: #444; font-size: 18px; font-weight: 600;">Hope all your wishes come true! 💫</p>  
             <div style="font-size: 100px; animation: bounce 2s infinite;">🍰</div>  
             <p style="color: #888; font-size: 14px; margin-top: 20px;">Enjoy your day!</p>
-            <button onclick="transitionScreen('screen-6', 'screen-7'); startScreen7Loader();" style="width: 100%; margin-top: 20px;">Aur Bhi Hai... 👀</button>
+            <button class="btn-common" onclick="transitionScreen('screen-6', 'screen-7'); startScreen7Loader();" style="width: 100%; margin-top: 20px;">Aur Bhi Hai... 👀</button>
         </div>  
     </div>  
 
+    <!-- SCREEN 7: LOADER FOR CARD -->
     <div id="screen-7" class="screen" style="background: transparent;">
         <div class="card-box">
             <div id="loader-content">
@@ -260,6 +492,7 @@
         </div>
     </div>
 
+    <!-- SCREEN 8: THE CARD -->
     <div id="screen-8" class="screen" style="justify-content: flex-start; padding-top: 50px;">
         <div class="bday-header">
             <h1>Happy Birthday!</h1>
@@ -283,12 +516,81 @@
             May every wish you make today come true. You deserve the world, and I'll always be here to remind you of that. <br><br>
             Let's always stay like this... together, forever 💕
         </div>
+        <!-- MERGED NEW BUTTON FOR FINAL SCENE -->
+        <button class="btn-special" style="margin-top: 30px; padding: 15px 40px;" onclick="goToSamScreen()">One last thing 🎁</button>
     </div>
 
+    <!-- SCREEN 9: SAM.HTML MERGED (DARK ROOM -> LIGHTS -> TIMELINE) -->
+    <div id="screen-9" class="screen">
+        <div id="sam-scene">
+            <div id="sam-bg"></div>
+            <canvas id="stars-canvas"></canvas>
+            <div id="sparkles"></div>
+            
+            <div class="light-row" id="row1"></div>
+            <div class="light-row" id="row2"></div>
+
+            <div id="bunting-zone">
+                <div class="bunting-rope"></div>
+                <div class="flag f1">S</div>
+                <div class="flag f2">N</div>
+                <div class="flag f3">E</div>
+                <div class="flag f4">H</div>
+                <div class="flag f5">A</div>
+            </div>
+
+            <div id="balloon-zone">
+                <div class="balloon balloon-l1 b1"></div>
+                <div class="balloon balloon-l2 b2"></div>
+                <div class="balloon balloon-l3 b3"></div>
+                <div class="balloon balloon-r1 b4"></div>
+                <div class="balloon balloon-r2 b5"></div>
+                <div class="balloon balloon-r3 b6"></div>
+            </div>
+
+            <div id="cake-wrap">
+                <div id="cake">
+                    <div id="candle">
+                        <div id="flame"></div>
+                        <div id="candle-body"></div>
+                    </div>
+                    <div class="tier top-tier"><div class="frost"></div></div>
+                    
+                    <div class="tier mid-tier">
+                        <div class="cake-dot left-dot"></div>
+                        <div class="cake-dot right-dot"></div>
+                        <div class="frost"></div>
+                        <div class="cake-text">HAPPY BIRTHDAY <br>SNEHA (SANA)</div>
+                    </div>
+                    
+                    <div class="tier base-tier"><div class="frost"></div></div>
+                    <div id="plate"></div>
+                </div>
+            </div>
+
+            <div id="ui-layer">
+                <button class="action-btn" id="btn-lights">TURN ON LIGHTS</button>
+                <button class="action-btn" id="btn-music">PLAY MUSIC</button>
+                <button class="action-btn" id="btn-decorate">LET'S DECORATE</button>
+                <button class="action-btn" id="btn-balloons">FLY WITH BALLOONS</button>
+                <button class="action-btn" id="btn-cake">MOST DELICIOUS CAKE EVER</button>
+                <button class="action-btn" id="btn-candle">LIGHT CANDLE</button>
+                <button class="action-btn" id="btn-happy">HAPPY BIRTHDAY</button>
+            </div>
+
+            <div id="message-container">
+                <div class="story-text" id="dynamic-text"></div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="bday-audio" loop></audio>
+
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>  
-        // --- AUDIO LOGIC ---  
+        // --- FINAL.HTML AUDIO LOGIC ---  
         function playSong(file, btnElement) {  
             let player = document.getElementById("player");  
             player.src = file;  
@@ -355,7 +657,7 @@
             }, 100);  
         }  
 
-// --- CAKE CUTTING LOGIC ---  
+        // --- CAKE CUTTING LOGIC ---  
         let pressCount = 0;  
         const totalPresses = 5;  
         function blowCandles() {  
@@ -378,10 +680,10 @@
             }  
         }  
 
-        // --- CONFETTI ENGINE 1 ---  
+        // --- CONFETTI ENGINE 1 (CDN) ---  
         let confettiRunning = false;
         function startConfetti() {  
-            if(confettiRunning) return; // Prevent multiple instances
+            if(confettiRunning) return; 
             confettiRunning = true;
             
             const canvas = document.getElementById('confetti-canvas');  
@@ -422,8 +724,6 @@
             animate();  
         }  
 
-        // --- MERGED LOGIC (SCREEN 7 & 8) ---
-        
         // Floating Hearts
         const heartsContainer = document.getElementById('bg-hearts');
         const heartSymbols = ['🤍', '💕', '🌸', '✨'];
@@ -437,7 +737,6 @@
             heartsContainer.appendChild(heart);
         }
 
-        // Trigger Screen 7 Loader
         function startScreen7Loader() {
             document.getElementById('loader-content').style.display = 'flex';
             document.getElementById('ready-content').style.display = 'none';
@@ -447,24 +746,20 @@
             }, 2500);
         }
 
-        // YouTube Player Setup
         var ytMusicPlayer;
         function onYouTubeIframeAPIReady() {
             ytMusicPlayer = new YT.Player('ytplayer', {
-                height: '1', // Needs to be non-zero structurally for some browsers
+                height: '1', 
                 width: '1',
                 videoId: 'vhVBWw6rId0',
                 playerVars: { 'autoplay': 0, 'controls': 0, 'showinfo': 0, 'rel': 0, 'loop': 1, 'playlist': 'vhVBWw6rId0' }
             });
         }
 
-        // Go to Final Screen (Screen 8)
         function goToScreen8() {
             if (ytMusicPlayer && ytMusicPlayer.playVideo) {
-                // Pause the previous audio if it's playing so they don't clash
                 let oldPlayer = document.getElementById("player");
                 if(oldPlayer && !oldPlayer.paused) oldPlayer.pause();
-                
                 ytMusicPlayer.playVideo();
             }
             transitionScreen('screen-7', 'screen-8');
@@ -472,19 +767,227 @@
             setTimeout(() => {
                 confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#ff9a9e', '#fecfef', '#ffffff', '#ff3385'] });
                 
-                // Keep confetti going periodically
-                let confettiInterval = setInterval(() => {
+                setInterval(() => {
                     confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff9a9e', '#ff3385'] });
                     confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff9a9e', '#ff3385'] });
                 }, 1500);
             }, 500);
         }
 
-        // Flip Card Event
         document.getElementById('card-scene').addEventListener('click', function() {
             this.classList.toggle('is-flipped');
             confetti({ particleCount: 40, spread: 40, origin: { y: 0.5 }, zIndex: 100 });
         });
+
+
+        /* =========================================
+           SAM.HTML (SCREEN 9) MERGED LOGIC
+        ========================================= */
+
+        function goToSamScreen() {
+            // Pause all previous audio
+            let oldPlayer = document.getElementById("player");
+            if(oldPlayer && !oldPlayer.paused) oldPlayer.pause();
+            if (ytMusicPlayer && ytMusicPlayer.pauseVideo) ytMusicPlayer.pauseVideo();
+            
+            // Hide hearts background and other visual clutters
+            document.getElementById('bg-hearts').style.display = 'none';
+
+            // Transition to the final dark screen
+            transitionScreen('screen-8', 'screen-9');
+
+            // Initial dramatic delay for a completely dark screen before showing "TURN ON LIGHTS"
+            setTimeout(() => {
+                const btnLights = document.getElementById('btn-lights');
+                btnLights.style.display = 'block';
+                setTimeout(() => btnLights.classList.add('visible'), 50);
+            }, 2500); 
+        }
+
+        const timelineMessages = [
+            "TODAY IS...", "AS BEAUTIFUL AS OTHER DAYS", "BUT YOU REALIZE", "ANOTHER YEAR HAS GONE",
+            "IN A BLINK OF THE EYES", "HOWEVER", "DO YOU KNOW..?", "TODAY IS JUST SPECIAL", "SO SPECIAL TO YOU",
+            "THAT'S WHY", "LET'S MAKE IT...", "THE BEST CELEBRATION EVER", "AND LET ME SHARE...", "A PIECE OF HAPPINESS TO YOU",
+            "I MADE ALL THIS...", "AS A BIRTHDAY PRESENT TO YOU", "THANKS FOR BEING THERE", "THANKS FOR THE FRIENDSHIP WE MADE",
+            "THANKS FOR EVERYTHING", "I WISH YOU ALL THE BEST", "MAY YOUR LIFE BE AT EASE", "MAY ALL YOUR WISHES COME TRUE",
+            "REMEMBER", "YOUR AMBITIONS", "YOU LIVE AS A FREE BIRD...", "FLYING IN THE BLUE SKY", "NOW THINGS ARE DIFFERENT...",
+            "REAL STORY OF YOUR LIFE", "IS JUST ABOUT TO BEGIN", "INDEED..", "THIS LIFE IS NOT EASY AS WE THOUGHT",
+            "BUT...", "DON'T WORRY", "DON'T BE AFRAID", "BECAUSE...", "YOU ARE NOT ALONE IN THIS WORLD",
+            "BECAUSE...", "THIS YEAR WILL BE BETTER", "AND I HOPE", "YOU'LL FIND...", "HAPPINESS ALONG THE WAY",
+            "KEEP YOUR SPIRITS UP", "ENJOY EVERY SINGLE MOMENT...", "THAT YOU EXPERIENCE TODAY",
+            "FILL IT WITH YOUR MOST BEAUTIFUL SMILE", "AND MAKE IT THE BEST MEMORY..", "LASTLY...",
+            "I'D LIKE TO WISH YOU ONE MORE TIME", "A VERY HAPPY BIRTHDAY"
+        ];
+
+        // Button Elements
+        const btnLights = document.getElementById('btn-lights');
+        const btnMusic = document.getElementById('btn-music');
+        const btnDecorate = document.getElementById('btn-decorate');
+        const btnBalloons = document.getElementById('btn-balloons');
+        const btnCake = document.getElementById('btn-cake');
+        const btnCandle = document.getElementById('btn-candle');
+        const btnHappy = document.getElementById('btn-happy');
+
+        function switchBtn(hideBtn, showBtn) {
+            hideBtn.classList.remove('visible');
+            setTimeout(() => {
+                hideBtn.style.display = 'none';
+                if(showBtn) {
+                    showBtn.style.display = 'block';
+                    setTimeout(() => showBtn.classList.add('visible'), 50);
+                }
+            }, 500);
+        }
+
+        btnLights.addEventListener('click', () => {
+            document.getElementById('screen-9').classList.add('lights-on');
+            document.getElementById('sam-bg').classList.add('active');
+            document.getElementById('stars-canvas').classList.add('active');
+            document.getElementById('row1').classList.add('active');
+            document.getElementById('row2').classList.add('active');
+            document.getElementById('sparkles').classList.add('active');
+            switchBtn(btnLights, btnMusic);
+        });
+
+        btnMusic.addEventListener('click', () => {
+            const audio = document.getElementById('bday-audio');
+            audio.play().catch(e => console.log("Audio play prevented or no src provided."));
+            switchBtn(btnMusic, btnDecorate);
+        });
+
+        btnDecorate.addEventListener('click', () => {
+            document.getElementById('bunting-zone').classList.add('active');
+            switchBtn(btnDecorate, btnBalloons);
+        });
+
+        btnBalloons.addEventListener('click', () => {
+            document.getElementById('balloon-zone').classList.add('active');
+            switchBtn(btnBalloons, btnCake);
+        });
+
+        btnCake.addEventListener('click', () => {
+            document.getElementById('cake-wrap').classList.add('active');
+            switchBtn(btnCake, btnCandle);
+        });
+
+        btnCandle.addEventListener('click', () => {
+            document.getElementById('candle').classList.add('active');
+            switchBtn(btnCandle, btnHappy);
+        });
+
+        btnHappy.addEventListener('click', () => {
+            switchBtn(btnHappy, null);
+            startStorySequence();
+        });
+
+        async function startStorySequence() {
+            const textEl = document.getElementById('dynamic-text');
+            const delay = ms => new Promise(res => setTimeout(res, ms));
+
+            for (let i = 0; i < timelineMessages.length; i++) {
+                textEl.innerText = timelineMessages[i];
+                textEl.classList.add('show');
+                await delay(2500); 
+                textEl.classList.remove('show');
+                await delay(1000); 
+            }
+            samConfetti(); 
+        }
+
+        // STARS CANVAS
+        const samCanvas = document.getElementById('stars-canvas');
+        const samCtx = samCanvas.getContext('2d');
+        let stars = [];
+
+        function resizeSam(){
+            samCanvas.width = innerWidth;
+            samCanvas.height = innerHeight;
+            stars = [];
+            for(let i=0; i<140; i++){
+                stars.push({
+                    x: Math.random() * samCanvas.width, y: Math.random() * samCanvas.height,
+                    r: Math.random() * 1.8, o: Math.random(), d: (Math.random() * .02) + .003
+                });
+            }
+        }
+
+        function animateStars(){
+            samCtx.clearRect(0, 0, samCanvas.width, samCanvas.height);
+            stars.forEach(s => {
+                samCtx.beginPath();
+                samCtx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+                samCtx.fillStyle = `rgba(255,255,255,${s.o})`;
+                samCtx.fill();
+                s.o += s.d;
+                if(s.o >= 1 || s.o <= .1) s.d *= -1;
+            });
+            requestAnimationFrame(animateStars);
+        }
+
+        resizeSam();
+        animateStars();
+        window.addEventListener('resize', resizeSam);
+
+        // LIGHTS
+        const lightColors = ['red', 'yellow', 'blue', 'green', 'pink', 'orange'];
+        function createLights(id){
+            const row = document.getElementById(id);
+            const wire = document.createElement('div');
+            wire.className = 'wire';
+            row.appendChild(wire);
+
+            for(let i=0; i<7; i++){
+                const wrap = document.createElement('div');
+                wrap.className = 'bulb-wrap';
+                wrap.style.left = `${(i+.5)*(100/7)}%`;
+                
+                const cap = document.createElement('div');
+                cap.className = 'cap';
+                const bulb = document.createElement('div');
+                bulb.className = `bulb ${lightColors[i%lightColors.length]}`;
+                
+                wrap.appendChild(cap);
+                wrap.appendChild(bulb);
+                row.appendChild(wrap);
+            }
+        }
+        createLights('row1');
+        createLights('row2');
+
+        // SPARKLES
+        const samSparkles = document.getElementById('sparkles');
+        const sparkleColors = ['#fff', '#ffd93d', '#ff78d2', '#57a8ff', '#4de46b', '#ffa43b'];
+        for(let i=0; i<36; i++){
+            const s = document.createElement('div');
+            s.className = 'spark';
+            s.style.left = Math.random()*100+'%';
+            s.style.top = Math.random()*100+'%';
+            s.style.background = sparkleColors[Math.floor(Math.random()*sparkleColors.length)];
+            s.style.animationDelay = `${Math.random()*3}s`;
+            samSparkles.appendChild(s);
+        }
+
+        // SAM CONFETTI (Renamed to avoid collision with CDN confetti)
+        function samConfetti(){
+            for(let i=0; i<140; i++){
+                const c = document.createElement('div');
+                c.className = 'sam-confetti';
+                c.style.left = Math.random()*100+'%';
+                c.style.top = '-20px';
+                c.style.background = `hsl(${Math.random()*360},100%,60%)`;
+                c.style.transform = `rotate(${Math.random()*360}deg)`;
+                c.style.transition = `${4+Math.random()*3}s linear`;
+                
+                document.getElementById('screen-9').appendChild(c);
+                
+                setTimeout(() => {
+                    c.style.top='110%';
+                    c.style.transform = `translateX(${(Math.random()-.5)*300}px) rotate(${Math.random()*720}deg)`;
+                }, 50);
+                
+                setTimeout(() => c.remove(), 7000);
+            }
+        }
     </script>
 </body>  
 </html>
